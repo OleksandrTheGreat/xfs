@@ -5,8 +5,6 @@ var
 
 		var path = parent ? parent + "\\" + target : target;
 
-		console.log(path);
-
 		if (!fs.existsSync(path)) {
 			console.log('path "' + path + '" does not exist.')
 			return;
