@@ -1,32 +1,32 @@
 const fs = require("fs");
 
 var
-	rmdir = function (target, parent) {
+    rmdir = function(target, parent) {
 
-		var path = parent ? parent + "\\" + target : target;
+        var path = parent ? parent + "\\" + target : target;
 
-		if (!fs.existsSync(path)) {
-			console.log('path "' + path + '" does not exist.')
-			return;
-		}
+        if (!fs.existsSync(path)) {
+            console.log('path "' + path + '" does not exist.')
+            return;
+        }
 
-		var stat = fs.statSync(path);
+        var stat = fs.statSync(path);
 
-		if (stat.isFile()) {
-			fs.unlinkSync(path);
-			return;
-		}
+        if (stat.isFile()) {
+            fs.unlinkSync(path);
+            return;
+        }
 
-		if (stat.isDirectory()) {
+        if (stat.isDirectory()) {
 
-			var items = fs.readdirSync(path);
+            var items = fs.readdirSync(path);
 
-			items.forEach(function (item) {
-				rmdir(item, path);
-			});
+            items.forEach(function(item) {
+                rmdir(item, path);
+            });
 
-			fs.rmdirSync(path);
-		}
-	};
+            fs.rmdirSync(path);
+        }
+    };
 
 exports.sync = rmdir;
